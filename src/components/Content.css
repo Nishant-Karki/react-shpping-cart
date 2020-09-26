@@ -1,3 +1,7 @@
 .content {
   min-height: 86vh;
 }
+
+* {
+  font: Arima Madurai;
+}

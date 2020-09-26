@@ -2,15 +2,24 @@ import React from "react";
 import Content from "./components/Content";
 import FooterCom from "./components/FooterCom";
 import HeaderCom from "./components/HeaderCom";
-//asdd
-function App() {
-  return (
-    <div className="grid-container">
-      <HeaderCom />
-      <Content />
-      <FooterCom />
-    </div>
-  );
+import data from "./data.json";
+
+class App extends React.Component {
+  state = {
+    products: data.products,
+    size: "",
+    sort: "",
+  };
+
+  render() {
+    return (
+      <div className="grid-container">
+        <HeaderCom />
+        <Content data={this.state.products} />
+        <FooterCom />
+      </div>
+    );
+  }
 }
 
 export default App;

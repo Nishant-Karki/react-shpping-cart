@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@500&display=swap");
 
-body {
+.media {
+  height: 250px;
+  width: 200px;
+}
+
+.font {
   font-family: Arima Madurai;
 }
