@@ -11,11 +11,53 @@ class App extends React.Component {
     sort: "",
   };
 
+  sortProducts = (e) => {
+    const value = e.target.value;
+    value === ""
+      ? this.setState({ sort: this.state.sort, products: data.products })
+      : this.setState({
+          sort: value,
+          products: data.products
+            .slice()
+            .sort((a, b) =>
+              value === "Lowest"
+                ? a.price < b.price
+                  ? 1
+                  : -1
+                : value === "Highest"
+                ? a.price > b.price
+                  ? 1
+                  : -1
+                : a._id > b._id
+                ? 1
+                : -1
+            ),
+        });
+  };
+
+  filterProducts = (e) => {
+    const value = e.target.value;
+    value === "" || value === "All"
+      ? this.setState({ size: this.state.size, products: data.products })
+      : this.setState({
+          size: value,
+          products: this.state.products.filter(
+            (product) => product.availableSizes.indexOf(value) >= 0
+          ),
+        });
+  };
+
   render() {
     return (
       <div className="grid-container">
         <HeaderCom />
-        <Content data={this.state.products} />
+        <Content
+          data={this.state.products}
+          size={this.state.size}
+          sort={this.state.sort}
+          filterProducts={this.filterProducts}
+          sortProducts={this.sortProducts}
+        />
         <FooterCom />
       </div>
     );

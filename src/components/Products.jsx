@@ -16,28 +16,10 @@ export default class Products extends Component {
     const { products } = this.props;
     console.log(products);
     return (
-      //   <div>
-      //     <ul>
-      //       {products.map((product) => (
-      //         <li key={product._id}>
-      //           <div>
-      //             <a href={`#${product._id}`}>
-      //               <img src={product.image} alt={product.title} />
-      //               <p>{product.title}</p>
-      //             </a>
-      //             <div>
-      //               <div>{product.price}</div>
-      //               <button>Add To Cart</button>
-      //             </div>
-      //           </div>
-      //         </li>
-      //       ))}
-      //     </ul>
-      //   </div>
       <div className="row">
         {products.map((product) => (
           <div key={product._id} className="col-md-4 col-sm-6">
-            <Card className="mb-2 mt-4">
+            <Card className="mb-2  mt-2 border">
               <CardActionArea>
                 <CardMedia
                   // style={{ height: 200, width: 200, objectFit: "contain" }}
