@@ -1,14 +1,54 @@
 import React from "react";
+
 import Content from "./components/Content";
+import data from "./data.json";
 import FooterCom from "./components/FooterCom";
 import HeaderCom from "./components/HeaderCom";
-import data from "./data.json";
 
 class App extends React.Component {
   state = {
     products: data.products,
+    cartItems: [],
     size: "",
     sort: "",
+  };
+  addToCart = (product) => {
+    const cartItems = this.state.cartItems.slice();
+    let alreadyInCart = false;
+
+    cartItems.forEach((item) => {
+      if (item._id === product._id) {
+        item.count++;
+        alreadyInCart = true;
+      }
+    });
+
+    if (!alreadyInCart) {
+      cartItems.push({ ...product, count: 1 });
+    }
+
+    this.setState({ cartItems });
+  };
+
+  filterProducts = (e) => {
+    const value = e.target.value;
+    console.log(value);
+
+    value === ""
+      ? this.setState({ size: "", products: data.products })
+      : this.setState({
+          size: value,
+          products: data.products.filter(
+            (product) => product.availableSizes.indexOf(value) >= 0
+          ),
+        });
+  };
+
+  removeFromCart = (product) => {
+    const cartItems = this.state.cartItems.slice();
+    this.setState({
+      cartItems: cartItems.filter((item) => item._id !== product._id),
+    });
   };
 
   sortProducts = (e) => {
@@ -35,27 +75,18 @@ class App extends React.Component {
         });
   };
 
-  filterProducts = (e) => {
-    const value = e.target.value;
-    value === "" || value === "All"
-      ? this.setState({ size: this.state.size, products: data.products })
-      : this.setState({
-          size: value,
-          products: this.state.products.filter(
-            (product) => product.availableSizes.indexOf(value) >= 0
-          ),
-        });
-  };
-
   render() {
     return (
-      <div className="grid-container">
+      <div>
         <HeaderCom />
         <Content
+          addToCart={this.addToCart}
+          cartData={this.state.cartItems}
           data={this.state.products}
+          filterProducts={this.filterProducts}
+          removeFromCart={this.removeFromCart}
           size={this.state.size}
           sort={this.state.sort}
-          filterProducts={this.filterProducts}
           sortProducts={this.sortProducts}
         />
         <FooterCom />

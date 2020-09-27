@@ -3,3 +3,12 @@
 body {
   font-family: Arima Madurai;
 }
+
+.fontz {
+  font-family: Arima Madurai;
+}
+
+.img-thumbnail {
+  height: 80px;
+  width: 90px;
+}

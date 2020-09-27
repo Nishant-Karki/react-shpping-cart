@@ -1,13 +1,25 @@
 import React from "react";
-import "./Content.css";
+
+import Cart from "./Cart";
 import FilterCom from "./FilterCom";
 import Products from "./Products";
 
-function Content({ data, size, sort, filterProducts, sortProducts }) {
+import "./Content.css";
+
+function Content({
+  addToCart,
+  cartData,
+  data,
+  filterProducts,
+  removeFromCart,
+  size,
+  sort,
+  sortProducts,
+}) {
   return (
     <div className="container content">
       <div className="row">
-        <div className="col-md-9">
+        <div className="col-md-9 ">
           <FilterCom
             count={data.length}
             size={size}
@@ -15,9 +27,11 @@ function Content({ data, size, sort, filterProducts, sortProducts }) {
             filterProducts={filterProducts}
             sortProducts={sortProducts}
           />
-          <Products products={data} />
+          <Products products={data} addToCart={addToCart} />
         </div>
-        <div className="col-md-3">Card Items</div>
+        <div className="col-md-3 pt-4 text-center">
+          <Cart cartItems={cartData} removeFromCart={removeFromCart} />
+        </div>
       </div>
     </div>
   );

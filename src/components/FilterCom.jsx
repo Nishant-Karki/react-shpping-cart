@@ -3,7 +3,7 @@ import React, { Component } from "react";
 
 export class FilterCom extends Component {
   render() {
-    const { size, count, sort, filterProducts, sortProducts } = this.props;
+    const { count, filterProducts, size, sort, sortProducts } = this.props;
     return (
       <div className="container">
         <div className="row">
@@ -35,7 +35,7 @@ export class FilterCom extends Component {
                 labelId="size-label"
                 id="size-select"
               >
-                <MenuItem value="All">All</MenuItem>
+                <MenuItem value="">All</MenuItem>
                 <MenuItem value="X5">X5</MenuItem>
                 <MenuItem value="XS">XS</MenuItem>
                 <MenuItem value="S">S</MenuItem>
