@@ -9,6 +9,7 @@ import "./Content.css";
 function Content({
   addToCart,
   cartData,
+  createOrder,
   data,
   filterProducts,
   removeFromCart,
@@ -30,7 +31,11 @@ function Content({
           <Products products={data} addToCart={addToCart} />
         </div>
         <div className="col-md-3 pt-4 text-center">
-          <Cart cartItems={cartData} removeFromCart={removeFromCart} />
+          <Cart
+            cartItems={cartData}
+            createOrder={createOrder}
+            removeFromCart={removeFromCart}
+          />
         </div>
       </div>
     </div>
