@@ -1,19 +1,20 @@
+import React, { Component } from "react";
+
 import {
+  Button,
   Card,
+  CardActions,
   CardActionArea,
+  CardContent,
   CardMedia,
   Typography,
-  CardContent,
-  CardActions,
-  Button,
 } from "@material-ui/core";
-import React, { Component } from "react";
 
 import "./Products.css";
 
 export default class Products extends Component {
   render() {
-    const { products } = this.props;
+    const { products, addToCart } = this.props;
     console.log(products);
     return (
       <div className="row">
@@ -27,16 +28,19 @@ export default class Products extends Component {
                   image={product.image}
                   title={product.title}
                 />
-                <CardContent>
-                  <h5 className="font">{product.title}</h5>
-                  <h6>$ {product.price}</h6>
-                  <CardActions className="justify-content-center">
-                    <Button className="text-warning">
-                      <h5 className="font ">Add To Cart</h5>
-                    </Button>
-                  </CardActions>
-                </CardContent>
               </CardActionArea>
+              <CardContent>
+                <h5 className="font">{product.title}</h5>
+                <h6>$ {product.price}</h6>
+                <CardActions className="justify-content-center">
+                  <Button
+                    className="text-warning"
+                    onClick={() => addToCart(product)}
+                  >
+                    <h5 className="font ">Add To Cart</h5>
+                  </Button>
+                </CardActions>
+              </CardContent>
             </Card>
           </div>
         ))}
