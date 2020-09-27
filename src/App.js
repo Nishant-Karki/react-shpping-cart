@@ -8,10 +8,13 @@ import HeaderCom from "./components/HeaderCom";
 class App extends React.Component {
   state = {
     products: data.products,
-    cartItems: [],
+    cartItems: localStorage.getItem("cartItems")
+      ? JSON.parse(localStorage.getItem("cartItems"))
+      : [],
     size: "",
     sort: "",
   };
+
   addToCart = (product) => {
     const cartItems = this.state.cartItems.slice();
     let alreadyInCart = false;
@@ -28,6 +31,11 @@ class App extends React.Component {
     }
 
     this.setState({ cartItems });
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  };
+
+  createOrder = (order) => {
+    alert(`Save order for ${order.name}`);
   };
 
   filterProducts = (e) => {
@@ -49,6 +57,10 @@ class App extends React.Component {
     this.setState({
       cartItems: cartItems.filter((item) => item._id !== product._id),
     });
+    localStorage.setItem(
+      "cartItems",
+      JSON.stringify(cartItems.filter((item) => item._id !== product._id))
+    );
   };
 
   sortProducts = (e) => {
@@ -82,6 +94,7 @@ class App extends React.Component {
         <Content
           addToCart={this.addToCart}
           cartData={this.state.cartItems}
+          createOrder={this.createOrder}
           data={this.state.products}
           filterProducts={this.filterProducts}
           removeFromCart={this.removeFromCart}
