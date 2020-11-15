@@ -1,5 +1,8 @@
-import { Button, Card, CardContent } from "@material-ui/core";
 import React, { Component } from "react";
+
+import { Button, Card, CardContent } from "@material-ui/core";
+
+import Fade from "react-reveal/Fade";
 
 export class Cart extends Component {
   state = {
@@ -39,26 +42,28 @@ export class Cart extends Component {
         <hr />
         <div className="mt-3">
           {cartItems.map((item, index) => (
-            <div key={index} className="row">
-              <div className="col-5 pr-0">
-                <img src={item.image} className=" img-thumbnail mr-0" />
-              </div>
-              <div className="col-6 pl-0 text-center mt-2">
-                {item.title}
-                <div className=" d-flex justify-content-between h5 mt-2">
-                  <span className="badge mt-2">
-                    ${item.price} x {item.count}
-                  </span>
-                  <Button
-                    color="secondary"
-                    style={{ backgroundColor: "#ffcccb" }}
-                    onClick={() => removeFromCart(item)}
-                  >
-                    <span className="fontz font-weight-bold">Remove</span>
-                  </Button>
+            <Fade left cascade>
+              <div key={index} className="row">
+                <div className="col-5 pr-0">
+                  <img src={item.image} className=" img-thumbnail mr-0" />
+                </div>
+                <div className="col-6 pl-0 text-center mt-2">
+                  {item.title}
+                  <div className=" d-flex justify-content-between h5 mt-2">
+                    <span className="badge mt-2">
+                      ${item.price} x {item.count}
+                    </span>
+                    <Button
+                      color="secondary"
+                      style={{ backgroundColor: "#ffcccb" }}
+                      onClick={() => removeFromCart(item)}
+                    >
+                      <span className="fontz font-weight-bold">Remove</span>
+                    </Button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Fade>
           ))}
         </div>
         {cartItems.length > 0 && (
@@ -81,57 +86,59 @@ export class Cart extends Component {
         )}
         <div className="mt-4">
           {this.state.showCheckout && (
-            <Card>
-              <CardContent>
-                <form onSubmit={this.createOrder}>
-                  <div className="form-group">
-                    <label htmlFor="email" className="d-flex">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      name="email"
-                      className="form-control form-control-sm"
-                      onChange={this.handleInput}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label className="d-flex" htmlFor="name">
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      name="name"
-                      className="form-control form-control-sm"
-                      onChange={this.handleInput}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label className="d-flex" htmlFor="address">
-                      Address
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      name="address"
-                      className="form-control form-control-sm"
-                      onChange={this.handleInput}
-                    />
-                  </div>
+            <Fade right cascade>
+              <Card>
+                <CardContent>
+                  <form onSubmit={this.createOrder}>
+                    <div className="form-group">
+                      <label htmlFor="email" className="d-flex">
+                        Email Address
+                      </label>
+                      <input
+                        type="email"
+                        required
+                        name="email"
+                        className="form-control form-control-sm"
+                        onChange={this.handleInput}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label className="d-flex" htmlFor="name">
+                        Name
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        name="name"
+                        className="form-control form-control-sm"
+                        onChange={this.handleInput}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label className="d-flex" htmlFor="address">
+                        Address
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        name="address"
+                        className="form-control form-control-sm"
+                        onChange={this.handleInput}
+                      />
+                    </div>
 
-                  <div className="float-right mb-3">
-                    <Button
-                      type="submit"
-                      style={{ color: "#008080", backgroundColor: "#CCF1D2" }}
-                    >
-                      <span className="fontz font-weight-bold">CheckOut</span>
-                    </Button>
-                  </div>
-                </form>
-              </CardContent>
-            </Card>
+                    <div className="float-right mb-3">
+                      <Button
+                        type="submit"
+                        style={{ color: "#008080", backgroundColor: "#CCF1D2" }}
+                      >
+                        <span className="fontz font-weight-bold">CheckOut</span>
+                      </Button>
+                    </div>
+                  </form>
+                </CardContent>
+              </Card>
+            </Fade>
           )}
         </div>
       </div>
